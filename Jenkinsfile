@@ -2,7 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage("A") {
+        stage("build"){
+            sh "mvn clean package"
+        }
+        stage("dev") {
             options {
                 timeout(time: 3, unit: "SECONDS")
             }
@@ -29,9 +32,9 @@ pipeline {
             }
         }
 
-        stage("B") {
+        stage("prod") {
             steps {
-                echo "Started stage B"
+                echo "Started stage prod"
             }
         }
     }
