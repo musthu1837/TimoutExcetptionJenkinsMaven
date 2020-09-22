@@ -2,15 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage("build"){
-            sh "mvn clean package"
+        stage("Build"){
+            steps{
+                sh "mvn clean package"
+            }
         }
-        stage("dev") {
+        stage("Dev") {
             options {
                 timeout(time: 3, unit: "SECONDS")
             }
 
             steps {
+                echo "Started stage dev"                
                 script {
                     Exception caughtException = null
 
@@ -32,7 +35,7 @@ pipeline {
             }
         }
 
-        stage("prod") {
+        stage("Prod") {
             steps {
                 echo "Started stage prod"
             }
